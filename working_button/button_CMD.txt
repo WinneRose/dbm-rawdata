@@ -1,0 +1,19 @@
+{
+  "name": "buttontest",
+  "temp": "",
+  "event-type": "1",
+  "_id": "AflgP",
+  "actions": [
+    {
+      "code": " let channelid = \"849200944193077259\"; // Change Channel ID\n let serverid = \"825748005692243979\";  // Change Server ID\n \nclient.ws.on('INTERACTION_CREATE', async interaction => {\n       \n        \n        let id= interaction.data.custom_id\n\n        let GameMap = new Map([\n            // Button ID \n            [\"buttonsave\",\"1\"], \n            [\"buttoncancel\",\"2\"],\n            [\"buttonlink\",\"3\"],\n        ])\n\n        let member = await client.guilds.cache.get(serverid).members.fetch(interaction.member.user.id) // sunucu id\n        if(!member) return;\n\n        let buttonid = GameMap.get(id)\n        let returnText;\n\n        if(buttonid == 1){\n            returnText = `WinneRose1`\n        }\n        else if (buttonid == 2){\n            returnText = `WinneRose2`\n\n        }\n        else if (buttonid == 3){\n            returnText = `WinneRose3`\n\n        }\n        \n        client.api.interactions(interaction.id, interaction.token).callback.post({\n            data: {\n                type: 4,\n                data: {\n                    content: returnText,\n                    flags: \"64\" // Hide Reply Flag\n                }\n            }\n        })\n        \n    });\nclient.api.channels(channelid).messages.post({ data: {\"content\":\"Tsukasa Button Testing\",\"components\":[{\"type\":1,\"components\":[ // mesajı göndereceği kanalın idsi\n\n{\"type\":2,\"style\":1,\"custom_id\":\"buttonsave\",\"label\":\"Save\"},                                                   // Green Button\n{\"type\":2,\"style\":4,\"custom_id\":\"buttoncancel\",\"label\":\"Cancel\"},                                               // Red Button\n{\"type\":2,\"style\":5,\"url\":\"https://top.gg/bot/837172042775134229/vote\",\"label\":\"Vote Tsukasa Bot ❤\"},          // Link Button\n// {\"type\":2,\"style\":3,\"custom_id\":\"buttonemoji\",\"emoji\":\"\",\"label\":\"Oy Websitesi\"},                            // Emoji Button (Not Working)\n\n\n\n\n]}]} })",
+      "behavior": "1",
+      "interpretation": "1",
+      "storage": "0",
+      "varName": "",
+      "VTypeSelect": "0",
+      "CVTypeValue": "",
+      "name": "Run Script"
+    }
+  ],
+  "restriction": "0"
+}
