@@ -1,0 +1,36 @@
+{
+  "name": "menutest",
+  "temp": "",
+  "event-type": "1",
+  "_id": "VKuOD",
+  "actions": [
+    {
+      "server": "0",
+      "varName": "",
+      "info": "1",
+      "storage": "1",
+      "varName2": "server_id",
+      "name": "Store Server Info"
+    },
+    {
+      "channel": "0",
+      "varName": "",
+      "info": "1",
+      "storage": "1",
+      "varName2": "channel_id",
+      "name": "Store Channel Info"
+    },
+    {
+      "code": "/*\nFirst of all, Thank you for using my Menu Selection Raw Data, I Hope It Helps You in Bot Development\ndon't forget the classes defined to all variables or it may not work.\nIf you need support, you can send a message to my Discord username or issues in the Github section.\n\nContributor: I would like to thank Semix here for noticing my little code error\n\nWinneRose#6245\nhttps://github.com/WinneRose/dbm-rawdata/issues\n\nMade by WinneRose \n*/\n let channelid = tempVars(\"channel_id\");\n let serverid = tempVars(\"server_id\");\n \n \n const checkdataop = {\n    \"class\" : [\"MainClass\", \"Option1Class\", \"Option2Class\"],\n    \"label\" : [\"WinneRose\", \"Discord\"],\n    \"description\" : [\"Github: https://github.com/WinneRose/dbm-rawdata\", \"Discord: WinneRose#6245\"],\n    \"emojiname\" :  [\"💖\"],\n}\n\n \nclient.ws.on('INTERACTION_CREATE', async interaction => {\n       \n        \n        let id= interaction.data.custom_id\n\n        let GameMap = new Map([\n            // Button ID \n            [\"menuitem\",\"1\"],\n            [\"menuitem\",\"2\"],\n\n        ])\n\n        let member = await client.guilds.cache.get(serverid).members.fetch(interaction.member.user.id) // sunucu id\n        if(!member) return;\n\n        let itemid = GameMap.get(id)\n        let returnText;\n\n      \n         if(itemid == 1){\n            returnText = `Thanks For Using Menu Selection Raw Data`\n        }\n        else if (itemid == 2){\n            returnText = `Made by WinneRose`\n\n        }\n        \n        \n        client.api.interactions(interaction.id, interaction.token).callback.post({\n            data: {\n                type: 4,\n                data: {\n                    content: returnText,\n                    flags: \"64\" // Hide Reply Flag\n                }\n            }\n        })\n        \n    });\nclient.api.channels(channelid).messages.post({ data: {\"content\":\"WinneRose Menu Selection\\nIf you want support to use raw data: create issue on github or send message on discord \\nDiscord: **WinneRose#6245**\\nGithub: **https://github.com/WinneRose/dbm-rawdata/issues**\",\"components\":[{\"type\":1,\"components\":[ // mesajı göndereceği kanalın idsi\n {\"type\":3,\"custom_id\":\"menuitem\",\"label\":\"Don't Care Here\",\"value\":checkdataop.class[0],\"options\":[{\"label\":checkdataop.label[0],\"value\":checkdataop.class[1],\"description\":checkdataop.description[0]},{\"label\":checkdataop.label[1],\"value\":checkdataop.class[2],\"description\":checkdataop.description[1],\"emoji\":{\"name\":checkdataop.emojiname[0]}}]}\n\n\n]}]} })",
+      "behavior": "1",
+      "interpretation": "1",
+      "storage": "0",
+      "varName": "",
+      "VTypeSelect": "0",
+      "CVTypeValue": "",
+      "name": "Run Script"
+    }
+  ],
+  "restriction": "0",
+  "permissions": "NONE"
+}
